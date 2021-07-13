@@ -24,6 +24,7 @@ jobs:
         with:
           working_directory: packer
           command: fix
+          target: packer.amzn2.aws.pkr.hcl
 
       # validate templates
       - name: Validate Template
