@@ -18,14 +18,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # fix backwards incompatibilities in template
-      - name: Fix Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          working_directory: packer
-          command: fix
-          target: packer.amzn2.aws.pkr.hcl
-
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
