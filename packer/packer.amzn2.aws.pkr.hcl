@@ -14,7 +14,7 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 # build blocks. A build block runs provisioners and post-processors on a
 # source.
 source "amazon-ebs" "amazon-linux-2" {
-  ami_name      = "${var.ami_name}-${local.timestamp}"
+  ami_name      = "${var.ami_name}-${local.timestamp}-${BUILD_ID}"
   instance_type = "t3.micro"
   region        = "${var.region}"
   source_ami_filter {
