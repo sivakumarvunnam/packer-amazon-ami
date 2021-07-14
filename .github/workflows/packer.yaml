@@ -21,6 +21,9 @@ jobs:
           role-external-id: ${{ secrets.AWS_ROLE_EXTERNAL_ID }}
           role-duration-seconds: 1200
           role-session-name: PackerSessionName
+          
+      - name: Identity Check
+        run: aws sts get-caller-identity
 
       # validate templates
       - name: Validate Template
