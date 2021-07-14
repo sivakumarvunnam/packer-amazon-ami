@@ -24,6 +24,7 @@ jobs:
           BUILD_ID: ${{ steps.build_id.outputs.id }}
 
   packer:
+    needs: build_id
     runs-on: ubuntu-latest
     name: packer
 
