@@ -14,6 +14,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         
+      - name: Github Actions Default ENV Variables
+        id: build_id
+        run: |
+          echo "Home: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_RUN_NUMBER: ${GITHUB_RUN_NUMBER}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "::set-env name=BUILD_NUMBER::${GITHUB_RUN_NUMBER}"
+        shell: bash
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -45,5 +59,6 @@ jobs:
           command: build
           arguments: "-color=false -on-error=abort"
           target: packer.amzn2.aws.pkr.hcl
+          script: "${{env.BUILD_NUMBER}}"
         env:
           PACKER_LOG: 1
