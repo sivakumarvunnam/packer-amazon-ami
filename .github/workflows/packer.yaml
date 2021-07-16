@@ -26,8 +26,12 @@ jobs:
           echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
           echo "GITHUB_SHA: ${GITHUB_SHA}"
           echo "GITHUB_REF: ${GITHUB_REF}"
-          echo "::set-env name=BUILD_NUMBER::${GITHUB_RUN_NUMBER}"
+          echo "BUILD_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
         shell: bash
+      - name: Set the value
+        id: step_two
+        run: |
+          echo "${{ env.BUILD_NUMBER }}"
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
